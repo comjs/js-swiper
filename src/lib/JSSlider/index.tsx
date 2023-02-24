@@ -36,6 +36,7 @@ const TimerBar = ({interval, initStartTime, forcePause}: TimerBarProps) => {
 
   useEffect(() => {
     if (prevPause !== forcePause) return
+    console.log(initStartTime)
 
     let frameId: number
     let start: number = initStartTime
@@ -161,6 +162,7 @@ const JSSlider = <T extends JSSliderData, U extends HTMLElement | null, V extend
 
   useEffect(() => {
     if (touch) {
+      console.log('item change')
       setItem(item => ({visible: item.prev ? item.prev : item.next ? item.next : item.visible}))
       setTouch(undefined)
       return
@@ -236,6 +238,7 @@ const JSSlider = <T extends JSSliderData, U extends HTMLElement | null, V extend
   const handleBoth = (type: 'prev' | 'next') => {
     setStartTime(new Date().getTime())
     setStyle(type === 'next' ? initialStyle : {transform: `translate3d(-100%, 0, 0)`})
+    console.log('both')
     setItem(item => ({
       ...getNeighbor(item[type] ?? item.visible),
       [type === 'prev' ? 'next' : 'prev']: undefined,
@@ -337,6 +340,10 @@ const JSSlider = <T extends JSSliderData, U extends HTMLElement | null, V extend
             if (isChange) {
               if (isNext) handleNext()
               else handlePrev()
+              
+              setTimerId(setInterval(handleNext, interval))
+            } else {
+              handlePlay()
             }
           }
         }

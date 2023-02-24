@@ -23,6 +23,8 @@ function App() {
           items={bannerList}
           interval={5000}
           duration={1000}
+          onChangeItem={console.log}
+          onChangeState={console.log}
         />
       </header>
     </div>
