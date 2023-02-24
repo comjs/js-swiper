@@ -1,6 +1,6 @@
 {
   "name": "js-slider",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "private": false,
   "author": {
     "name": "ImJaeseong",
@@ -14,6 +14,7 @@
   "contributors": [
     "ImJaeseong"
   ],
+  "keywords": ["slide", "slider", "carousel", "swipe", "swiper"],
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "files": [
