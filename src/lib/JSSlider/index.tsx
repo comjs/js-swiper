@@ -276,6 +276,17 @@ const JSSlider = <T extends JSSliderData, U extends HTMLElement | null, V extend
 
   /** For mobile device */
 
+  useEffect(() => {
+    if(!mainEl.current) return
+
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault()
+    }
+
+    mainEl.current.addEventListener('touchmove', handleTouchMove)
+    return () => mainEl.current?.removeEventListener('touchmove', handleTouchMove)
+  }, [mainEl])
+
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     if (touch) return
 
