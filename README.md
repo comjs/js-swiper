@@ -13,6 +13,8 @@ import {JSSliderData} from 'js-slider/dist/cjs/src/lib/JSSlider'
 
 ...
 
+const stateEl = useRef<HTMLButtonElement>(null)
+
 const itemList: JSSliderData[] = [
   {order: 1, image: '/image8.png'},
   {order: 2, image: '/image9.png'},
@@ -23,11 +25,13 @@ const itemList: JSSliderData[] = [
 
 <JSSlider
   items={itemList}
+  stateButton={stateEl.current}
   duration={200}
   interval={5000}
   onChangeItem={console.log}
   onChangeState={console.log}
- />
+/>
+<button ref={stateEl}>Toggle State</button>
 ```
 
 ### For React development environment
@@ -56,15 +60,33 @@ const useEffectOnce = (callback: React.EffectCallback, dependencyList: React.Dep
 ## Properties
 |Property|Default|Type|Description|
 |---|:---:|---|---|
-|items|undefined|`JSSliderData`||
-|prevButton|undefined|`HTMLElement`||
-|nextButton|undefined|`HTMLElement`||
-|stateButton|undefined|`HTMLElement`||
+|items|undefined|extends [`JSSliderData`](#jssliderdata)||
+|prevButton|undefined|extends `HTMLElement`||
+|nextButton|undefined|extends `HTMLElement`||
+|stateButton|undefined|extends `HTMLElement`||
 |duration|200|`number`||
 |interval|0|`number`||
 |width|undefined|`number`||
 |height|undefined|`number`||
 |startEffect|undefined|`'useEffectOnce'` or [`useEffect type`](#typeof-useeffect)|[`For React dev environment`](#for-react-development-environment)|
+
+<details>
+<summary><a id="jssliderdata">JSSliderData</a></summary>
+
+```Typescript
+type JSSliderData = {
+  image: string
+  order: number
+  ad?: boolean
+} & ({
+  link: string
+  newTab?: boolean
+} | {
+  link?: never
+  newTab?: never
+})
+```
+</details>
 
 <details>
 <summary><a id="typeof-useeffect">useEffect type</a></summary>
