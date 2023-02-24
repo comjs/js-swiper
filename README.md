@@ -55,7 +55,7 @@ const useEffectOnce = (callback: React.EffectCallback, dependencyList: React.Dep
 
 ## Properties
 |Property|Default|Type|Description|
-|:---:|:---:|---|---|
+|---|:---:|---|---|
 |items|undefined|`JSSliderData`||
 |prevButton|undefined|`HTMLElement`||
 |nextButton|undefined|`HTMLElement`||
