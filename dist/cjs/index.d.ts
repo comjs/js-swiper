@@ -1,0 +1,1 @@
+export { JSSlider } from './src/lib';
