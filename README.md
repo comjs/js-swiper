@@ -35,7 +35,7 @@ const itemList: JSSliderData[] = [
 ```
 
 ### For React development environment
-> This feature is due to [useEffect called twice issue in React 18](https://github.com/facebook/react/issues/24553)
+> This feature is for About [useEffect called twice issue in React 18](https://github.com/facebook/react/issues/24553)
 
 ```Typescript
 <JSSlider
