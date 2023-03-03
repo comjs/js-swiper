@@ -1,4 +1,12 @@
 import styled from '@emotion/styled'
+import {Property} from 'csstype'
+
+declare module '@emotion/react' {
+  interface Theme {
+    backgroundColor?: Property.BackgroundColor
+    objectFit?: Property.ObjectFit
+  }
+}
 
 export const Container = styled.div`
   position: relative;
@@ -35,17 +43,19 @@ export const ImageWrapperDiv = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  background-color: ${props => props.theme.backgroundColor}
 `
 
 export const ImageWrapperA = styled.a`
   display: flex;
   width: 100%;
   height: 100%;
+  background-color: ${props => props.theme.backgroundColor}
 `
 
 export const Image = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: ${props => props.theme.objectFit ?? 'cover'};
   object-position: center;
 `

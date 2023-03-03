@@ -3,11 +3,14 @@ import {TIMINGFUNC_MAP} from '../utils/functions'
 import {CSSProperties, DependencyList, useCallback, useEffect, useMemo, useReducer, useRef, useState} from 'react'
 import usePrevious from '../utils/usePrevious'
 import useEffectOnce from '../utils/useEffectOnce'
+import {Property} from 'csstype'
 
 export type JSSliderData = {
   image: string
   order: number
-  ad?: boolean
+  /** image styles */
+  backgroundColor?: Property.BackgroundColor
+  objectFit?: Property.ObjectFit
 } & (
   | {
       link: string
@@ -66,12 +69,12 @@ interface ImageWrapperProps<T> {
 
 const ImageWrapper = <T extends JSSliderData>({item}: ImageWrapperProps<T>) => {
   return item.link ? (
-    <Styled.ImageWrapperA href={item.link} target={item.newTab ? '_blank' : undefined} rel="noopener noreferrer" draggable={false}>
-      <Styled.Image src={item.image} draggable={false} />
+    <Styled.ImageWrapperA theme={{backgroundColor: item.backgroundColor}} href={item.link} target={item.newTab ? '_blank' : undefined} rel="noopener noreferrer" draggable={false}>
+      <Styled.Image theme={{objectFit: item.objectFit}} src={item.image} draggable={false} />
     </Styled.ImageWrapperA>
   ) : (
-    <Styled.ImageWrapperDiv>
-      <Styled.Image src={item.image} draggable={false} />
+    <Styled.ImageWrapperDiv theme={{backgroundColor: item.backgroundColor}}>
+      <Styled.Image theme={{objectFit: item.objectFit}} src={item.image} draggable={false} />
     </Styled.ImageWrapperDiv>
   )
 }
@@ -368,7 +371,7 @@ const JSSlider = <T extends JSSliderData, U extends HTMLElement | null, V extend
 
   return (
     <Styled.Container ref={mainEl} style={{width, height}}>
-      {!!interval && <TimerBar interval={interval - duration - 500} initStartTime={startTime} forcePause={timerBarPause} />}
+      {!!interval && <TimerBar interval={interval - duration - 200} initStartTime={startTime} forcePause={timerBarPause} />}
       <Styled.ImagesWrapper
         style={touch?.style ?? style}
         onTransitionEnd={handleTransitionEnd}

@@ -77,6 +77,9 @@ const useEffectOnce = (callback: React.EffectCallback, dependencyList: React.Dep
 type JSSliderData = {
   image: string
   order: number
+  /** image styles */
+  backgroundColor?: Property.BackgroundColor
+  objectFit?: Property.ObjectFit
 } & ({
   link: string
   newTab?: boolean

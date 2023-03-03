@@ -1,12 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
-import JSSlider from './lib/JSSlider';
+import JSSlider, { JSSliderData } from './lib/JSSlider';
 
 function App() {
-  const bannerList = [
+  const bannerList: JSSliderData[] = [
     {order: 1, image: '/examples/banner1.webp'},
     {order: 2, image: '/examples/banner2.jpg'},
     {order: 3, image: '/examples/banner3.jpg'},
+    {order: 4, image: '/examples/banner4.gif'},
+    {order: 5, image: '/examples/banner5.jpg', backgroundColor: 'rgb(164, 138, 202)', objectFit: 'contain'}
   ]
 
   return (
@@ -19,7 +21,7 @@ function App() {
           height={200}
           items={bannerList}
           interval={5000}
-          duration={1000}
+          duration={200}
           onChangeItem={console.log}
           onChangeState={console.log}
         />
