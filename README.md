@@ -1,6 +1,13 @@
 # Slider
 Beautiful slider for React
 
+## Demo
+
+
+https://user-images.githubusercontent.com/107611589/222640699-2c32bfe6-2ae9-473b-b45f-f4ca41f96a71.mov
+
+
+
 ## Install
 `npm install -s js-slider`
 
