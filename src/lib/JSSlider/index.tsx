@@ -123,6 +123,7 @@ const JSSlider = <T extends JSSliderData, U extends HTMLElement | null, V extend
   startEffect,
 }: JSSliderProps<T, U, V>) => {
   if (!items.length) return null
+  if (items.length === 1) items = Array<T>(2).fill(items[0]).map<T>((item, i) => ({ ...item, order: item.order+i }))
 
   const initialStyle = {transform: `translate3d(0%, 0, 0)`}
 

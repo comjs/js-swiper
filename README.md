@@ -77,7 +77,6 @@ const useEffectOnce = (callback: React.EffectCallback, dependencyList: React.Dep
 type JSSliderData = {
   image: string
   order: number
-  ad?: boolean
 } & ({
   link: string
   newTab?: boolean
