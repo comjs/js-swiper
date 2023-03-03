@@ -246,8 +246,10 @@ const JSSlider = <T extends JSSliderData, U extends HTMLElement | null, V extend
     }))
   }
 
-  const handleAutoPlay = () => setTimerId(setInterval(handleNext, interval))
+  const handleAutoPlay = () => !!interval && interval > 0 && setTimerId(setInterval(handleNext, interval))
   const handleTimeoutInterval = (timeout_interval: number, interval: number) => {
+    if(!interval || interval < 0) return
+
     setTimerId(
       setTimeout(() => {
         handleNext()
@@ -258,7 +260,7 @@ const JSSlider = <T extends JSSliderData, U extends HTMLElement | null, V extend
   }
 
   const handlePlay = () => {
-    if (!interval) return
+    if (!interval || interval < 0) return
     const continueTime = interval - (diff ?? 0)
     setStartTime(new Date().getTime() + continueTime - interval)
     handleChangeState('play')
@@ -353,7 +355,7 @@ const JSSlider = <T extends JSSliderData, U extends HTMLElement | null, V extend
               if (isNext) handleNext()
               else handlePrev()
 
-              setTimerId(setInterval(handleNext, interval))
+              if(!!interval && interval > 0) setTimerId(setInterval(handleNext, interval))
             } else {
               handlePlay()
             }
