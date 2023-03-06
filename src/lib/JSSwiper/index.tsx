@@ -5,7 +5,7 @@ import usePrevious from '../utils/usePrevious'
 import useEffectOnce from '../utils/useEffectOnce'
 import {Property} from 'csstype'
 
-export type JSSliderData = {
+export type JSSwiperData = {
   image: string
   order: number
   /** image styles */
@@ -21,7 +21,7 @@ export type JSSliderData = {
       newTab?: never
     }
 )
-interface SliderState<T> {
+interface SwiperState<T> {
   prev?: T
   visible: T
   next?: T
@@ -67,7 +67,7 @@ interface ImageWrapperProps<T> {
   item: T
 }
 
-const ImageWrapper = <T extends JSSliderData>({item}: ImageWrapperProps<T>) => {
+const ImageWrapper = <T extends JSSwiperData>({item}: ImageWrapperProps<T>) => {
   return item.link ? (
     <Styled.ImageWrapperA theme={{backgroundColor: item.backgroundColor}} href={item.link} target={item.newTab ? '_blank' : undefined} rel="noopener noreferrer" draggable={false}>
       <Styled.Image theme={{objectFit: item.objectFit}} src={item.image} draggable={false} />
@@ -79,7 +79,7 @@ const ImageWrapper = <T extends JSSliderData>({item}: ImageWrapperProps<T>) => {
   )
 }
 
-type JSSliderProps<T, U, V> = {
+type JSSwiperProps<T, U, V> = {
   items: T[]
   /** millisecond */
   duration?: number
@@ -112,7 +112,7 @@ type JSSliderProps<T, U, V> = {
       }
   )
 
-const JSSlider = <T extends JSSliderData, U extends HTMLElement | null, V extends HTMLElement | null>({
+const JSSwiper = <T extends JSSwiperData, U extends HTMLElement | null, V extends HTMLElement | null>({
   items,
   prevButton,
   nextButton,
@@ -124,7 +124,7 @@ const JSSlider = <T extends JSSliderData, U extends HTMLElement | null, V extend
   width,
   height,
   startEffect,
-}: JSSliderProps<T, U, V>) => {
+}: JSSwiperProps<T, U, V>) => {
   if (!items.length) return null
   if (items.length === 1) items = Array<T>(2).fill(items[0]).map<T>((item, i) => ({ ...item, order: item.order+i }))
 
@@ -134,7 +134,7 @@ const JSSlider = <T extends JSSliderData, U extends HTMLElement | null, V extend
   const mainWidth = useMemo(() => mainEl.current?.clientWidth || 0, [mainEl.current?.clientWidth])
   const swipeSize = useMemo(() => (mainEl.current?.clientWidth || 0) / 4 ?? 100, [mainEl.current?.clientWidth])
 
-  const [item, setItem] = useState<SliderState<T>>({visible: items[0]})
+  const [item, setItem] = useState<SwiperState<T>>({visible: items[0]})
   const [style, setStyle] = useState<CSSProperties>(initialStyle)
   const [timerId, setTimerId] = useState<NodeJS.Timer>()
   const [startTime, setStartTime] = useState<number>(new Date().getTime())
@@ -393,4 +393,4 @@ const JSSlider = <T extends JSSliderData, U extends HTMLElement | null, V extend
   )
 }
 
-export default JSSlider
+export default JSSwiper

@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import JSSlider, { JSSliderData } from './lib/JSSlider';
+import JSSwiper, { JSSwiperData } from './lib/JSSwiper';
 
 function App() {
-  const bannerList: JSSliderData[] = [
+  const bannerList: JSSwiperData[] = [
     {order: 1, image: '/examples/banner1.webp'},
     {order: 2, image: '/examples/banner2.jpg'},
     {order: 3, image: '/examples/banner3.jpg'},
@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <JSSlider
+        <JSSwiper
           startEffect="useEffectOnce"
           width={400}
           height={200}

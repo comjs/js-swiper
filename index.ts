@@ -1,1 +1,1 @@
-export {JSSlider} from './src/lib'
+export {JSSwiper} from './src/lib'

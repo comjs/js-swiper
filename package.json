@@ -1,6 +1,6 @@
 {
-  "name": "js-slider",
-  "version": "0.1.25",
+  "name": "js-swiper",
+  "version": "0.1.0",
   "private": false,
   "author": {
     "name": "ImJaeseong",
@@ -9,12 +9,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/comjs/js-slider"
+    "url": "https://github.com/comjs/js-swiper"
   },
   "contributors": [
     "ImJaeseong"
   ],
-  "keywords": ["react", "nextjs", "slide", "slider", "carousel", "swipe", "swiper"],
+  "keywords": ["react", "nextjs", "carousel", "swipe", "swiper"],
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "files": [

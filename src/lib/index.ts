@@ -1,1 +1,1 @@
-export { default as JSSlider } from './JSSlider'
+export { default as JSSwiper } from './JSSwiper'

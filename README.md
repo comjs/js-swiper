@@ -1,5 +1,5 @@
-# Slider
-Beautiful slider for React
+# Swiper
+Beautiful swiper for React
 
 ## Demo
 
@@ -9,20 +9,20 @@ https://user-images.githubusercontent.com/107611589/222640699-2c32bfe6-2ae9-473b
 
 
 ## Install
-`npm install -s js-slider`
+`npm install -s js-swiper`
 
 ## Usage
 
 ### For general
 ```Typescript
-import {JSSlider} from 'js-slider'
-import {JSSliderData} from 'js-slider/dist/cjs/src/lib/JSSlider'
+import {JSSwiper} from 'js-swiper'
+import {JSSwiperData} from 'js-swiper/dist/cjs/src/lib/JSSwiper'
 
 ...
 
 const stateEl = useRef<HTMLButtonElement>(null)
 
-const itemList: JSSliderData[] = [
+const itemList: JSSwiperData[] = [
   {order: 1, image: '/image8.png'},
   {order: 2, image: '/image9.png'},
   {order: 3, image: '/image10.png'},
@@ -30,7 +30,7 @@ const itemList: JSSliderData[] = [
 
 ...
 
-<JSSlider
+<JSSwiper
   items={itemList}
   stateButton={stateEl.current}
   duration={200}
@@ -45,7 +45,7 @@ const itemList: JSSliderData[] = [
 > This feature is for About [useEffect called twice issue in React 18](https://github.com/facebook/react/issues/24553)
 
 ```Typescript
-<JSSlider
+<JSSwiper
   ...
   startEffect="useEffectOnce"
  />
@@ -58,7 +58,7 @@ const useEffectOnce = (callback: React.EffectCallback, dependencyList: React.Dep
 
 ...
 
-<JSSlider
+<JSSwiper
   ...
   startEffect={useEffectOnce}
  />
@@ -67,7 +67,7 @@ const useEffectOnce = (callback: React.EffectCallback, dependencyList: React.Dep
 ## Properties
 |Property|Default|Type|Description|
 |---|:---:|---|---|
-|items|undefined|extends [`JSSliderData`](#jssliderdata)||
+|items|undefined|extends [`JSSwiperData`](#jsswiperdata)||
 |prevButton|undefined|extends `HTMLElement`||
 |nextButton|undefined|extends `HTMLElement`||
 |stateButton|undefined|extends `HTMLElement`||
@@ -78,10 +78,10 @@ const useEffectOnce = (callback: React.EffectCallback, dependencyList: React.Dep
 |startEffect|undefined|`'useEffectOnce'` or [`useEffect type`](#typeof-useeffect)|[`For React dev environment`](#for-react-development-environment)|
 
 <details>
-<summary><a id="jssliderdata">JSSliderData</a></summary>
+<summary><a id="jsswiperdata">JSSwiperData</a></summary>
 
 ```Typescript
-type JSSliderData = {
+type JSSwiperData = {
   image: string
   order: number
   /** image styles */
