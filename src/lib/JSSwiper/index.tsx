@@ -30,15 +30,14 @@ interface SwiperState<T> {
 interface TimerBarProps {
   interval: number
   initStartTime: number
-  forcePause: number
+  forcePause: boolean
 }
 
 const TimerBar = ({interval, initStartTime, forcePause}: TimerBarProps) => {
-  const prevPause = usePrevious(forcePause)
   const [style, setStyle] = useState<CSSProperties>()
 
   useEffect(() => {
-    if (prevPause !== forcePause) return
+    if (forcePause) return
 
     let frameId: number
     let start: number = initStartTime
@@ -58,7 +57,7 @@ const TimerBar = ({interval, initStartTime, forcePause}: TimerBarProps) => {
 
     frameId = requestAnimationFrame(step)
     return () => cancelAnimationFrame(frameId)
-  }, [interval, initStartTime, forcePause, prevPause])
+  }, [interval, initStartTime, forcePause])
 
   return <Styled.TimerBar style={style} />
 }
@@ -139,7 +138,7 @@ const JSSwiper = <T extends JSSwiperData, U extends React.MutableRefObject<HTMLB
   const [timerId, setTimerId] = useState<NodeJS.Timer>()
   const [startTime, setStartTime] = useState<number>(new Date().getTime())
   const [diff, setDiff] = useState<number>()
-  const [timerBarPause, setTimerBarPause] = useReducer(v => ++v, 0)
+  const [timerBarPause, setTimerBarPause] = useState<boolean>(false)
   // const [,forceRender] = useReducer(() => ({}), {})
 
   // useEffect(() => {
@@ -260,7 +259,6 @@ const JSSwiper = <T extends JSSwiperData, U extends React.MutableRefObject<HTMLB
     setTimerId(
       setTimeout(() => {
         handleNext()
-
         setTimerId(setInterval(handleNext, interval))
       }, timeout_interval)
     )
@@ -270,6 +268,7 @@ const JSSwiper = <T extends JSSwiperData, U extends React.MutableRefObject<HTMLB
     if (!interval || interval < 0) return
     const continueTime = interval - (diff ?? 0)
     setStartTime(new Date().getTime() + continueTime - interval)
+    setTimerBarPause(false)
     handleChangeState('play')
     handleTimeoutInterval(continueTime, interval)
   }
@@ -277,7 +276,7 @@ const JSSwiper = <T extends JSSwiperData, U extends React.MutableRefObject<HTMLB
   const handlePause = () => {
     const diff = new Date().getTime() - startTime
     setDiff(diff)
-    setTimerBarPause()
+    setTimerBarPause(true)
     handleChangeState('pause')
     clearInterval(timerId)
     setTimerId(undefined)
