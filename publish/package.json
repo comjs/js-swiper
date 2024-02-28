@@ -1,0 +1,35 @@
+{
+    "name": "js-swiper",
+    "version": "1.0.0",
+    "private": false,
+    "author": {
+      "name": "ImJaeseong",
+      "email": "com.imjs@gmail.com"
+    },
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/comjs/js-swiper"
+    },
+    "contributors": [
+      "ImJaeseong"
+    ],
+    "bugs": {
+      "url": "https://github.com/comjs/js-swiper/issues"
+    },
+    "keywords": ["react", "nextjs", "carousel", "swipe", "swiper"],
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/esm/index.js",
+    "files": [
+      "dist",
+      "dist/cjs",
+      "dist/esm"
+    ],
+    "dependencies": {
+        "@emotion/react": "^11.10.6",
+        "@emotion/styled": "^11.10.6",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "typescript": "^4.9.5"
+    }
+}

@@ -1,46 +1,106 @@
-# Getting Started with Create React App
+# Swiper
+Beautiful swiper for React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Demo
 
-## Available Scripts
 
-In the project directory, you can run:
+https://user-images.githubusercontent.com/107611589/222640699-2c32bfe6-2ae9-473b-b45f-f4ca41f96a71.mov
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Install
+`npm install js-swiper`
 
-### `npm test`
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### For general
+```Typescript
+import {JSSwiper} from 'js-swiper'
+import {JSSwiperData} from 'js-swiper/dist/cjs/src/lib/JSSwiper'
 
-### `npm run build`
+...
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+const stateEl = useRef<HTMLButtonElement>(null)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+const itemList: JSSwiperData[] = [
+  {order: 1, image: '/image8.png'},
+  {order: 2, image: '/image9.png'},
+  {order: 3, image: '/image10.png'},
+]
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+...
 
-### `npm run eject`
+<JSSwiper
+  items={itemList}
+  stateButton={stateEl.current}
+  duration={200}
+  interval={5000}
+  onChangeItem={console.log}
+  onChangeState={console.log}
+/>
+<button ref={stateEl}>Toggle State</button>
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### For React development environment
+> This feature is for About [useEffect called twice issue in React 18](https://github.com/facebook/react/issues/24553)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```Typescript
+<JSSwiper
+  ...
+  startEffect="useEffectOnce"
+ />
+```
+or
+```Typescript
+const useEffectOnce = (callback: React.EffectCallback, dependencyList: React.DependencyList | undefined) => {
+  ...
+}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+...
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<JSSwiper
+  ...
+  startEffect={useEffectOnce}
+ />
+```
 
-## Learn More
+## Properties
+|Property|Default|Type|Description|
+|---|:---:|---|---|
+|items|undefined|extends [`JSSwiperData`](#jsswiperdata)||
+|prevButton|undefined|extends `HTMLElement`||
+|nextButton|undefined|extends `HTMLElement`||
+|stateButton|undefined|extends `HTMLElement`||
+|duration|200|`number`||
+|interval|0|`number`||
+|width|undefined|`number`||
+|height|undefined|`number`||
+|startEffect|undefined|`'useEffectOnce'` or [`useEffect type`](#typeof-useeffect)|[`For React dev environment`](#for-react-development-environment)|
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<details>
+<summary><a id="jsswiperdata">JSSwiperData</a></summary>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```Typescript
+type JSSwiperData = {
+  image: string
+  order: number
+  /** image styles */
+  backgroundColor?: Property.BackgroundColor
+  objectFit?: Property.ObjectFit
+} & ({
+  link: string
+  newTab?: boolean
+} | {
+  link?: never
+  newTab?: never
+})
+```
+</details>
+
+<details>
+<summary><a id="typeof-useeffect">useEffect type</a></summary>
+
+```Typescript
+(callback: React.EffectCallback, dependencyList: React.DependencyList | undefined) => void
+```
+</details>

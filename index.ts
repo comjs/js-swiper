@@ -1,0 +1,1 @@
+export {JSSwiper} from './src/lib'
