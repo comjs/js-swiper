@@ -9,14 +9,14 @@ https://user-images.githubusercontent.com/107611589/222640699-2c32bfe6-2ae9-473b
 
 
 ## Install
-`npm install js-swiper`
+`npm install @comjaes/swiper`
 
 ## Usage
 
 ### For general
 ```Typescript
-import {JSSwiper} from 'js-swiper'
-import {JSSwiperData} from 'js-swiper/dist/cjs/src/lib/JSSwiper'
+import {JSSwiper} from '@comjaes/swiper'
+import {JSSwiperData} from '@comjaes/swiper/dist/cjs/src/lib/JSSwiper'
 
 ...
 
