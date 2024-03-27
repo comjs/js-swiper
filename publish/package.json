@@ -1,9 +1,9 @@
 {
     "name": "js-swiper",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "private": false,
     "author": {
-      "name": "ImJaeseong",
+      "name": "com_imjs",
       "email": "com.imjs@gmail.com"
     },
     "license": "MIT",
@@ -12,7 +12,7 @@
       "url": "https://github.com/comjs/js-swiper"
     },
     "contributors": [
-      "ImJaeseong"
+      "com_imjs"
     ],
     "bugs": {
       "url": "https://github.com/comjs/js-swiper/issues"

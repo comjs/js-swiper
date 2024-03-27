@@ -1,7 +1,6 @@
 import * as Styled from '../styles/styled'
 import {TIMINGFUNC_MAP} from '../utils/functions'
-import {CSSProperties, DependencyList, useCallback, useEffect, useMemo, useReducer, useRef, useState} from 'react'
-import usePrevious from '../utils/usePrevious'
+import {CSSProperties, DependencyList, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import useEffectOnce from '../utils/useEffectOnce'
 import {Property} from 'csstype'
 
