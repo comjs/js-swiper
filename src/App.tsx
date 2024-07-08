@@ -5,7 +5,7 @@ import { JSSwiper } from './lib';
 import { JSSwiperData } from './lib/JSSwiper';
 
 const bannerList: JSSwiperData[] = [
-  {order: 1, image: '/examples/banner1.webp'},
+  {order: 1, image: '/examples/banner1.webp', alt: 'test'},
   {order: 2, image: '/examples/banner2.jpg'},
   {order: 3, image: '/examples/banner3.jpg'},
   {order: 4, image: '/examples/banner4.gif'},

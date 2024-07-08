@@ -10,6 +10,7 @@ export type JSSwiperData = {
   /** image styles */
   backgroundColor?: Property.BackgroundColor
   objectFit?: Property.ObjectFit
+  alt?: string
 } & (
   | {
       link: string
@@ -68,11 +69,11 @@ interface ImageWrapperProps<T> {
 const ImageWrapper = <T extends JSSwiperData>({item}: ImageWrapperProps<T>) => {
   return item.link ? (
     <Styled.ImageWrapperA theme={{backgroundColor: item.backgroundColor}} href={item.link} target={item.newTab ? '_blank' : undefined} rel="noopener noreferrer" draggable={false}>
-      <Styled.Image theme={{objectFit: item.objectFit}} src={item.image} draggable={false} />
+      <Styled.Image theme={{objectFit: item.objectFit}} src={item.image} draggable={false} alt={item.alt} />
     </Styled.ImageWrapperA>
   ) : (
     <Styled.ImageWrapperDiv theme={{backgroundColor: item.backgroundColor}}>
-      <Styled.Image theme={{objectFit: item.objectFit}} src={item.image} draggable={false} />
+      <Styled.Image theme={{objectFit: item.objectFit}} src={item.image} draggable={false} alt={item.alt} />
     </Styled.ImageWrapperDiv>
   )
 }
