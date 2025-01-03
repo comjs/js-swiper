@@ -1,6 +1,6 @@
 import * as Styled from '../styles/styled'
 import {TIMINGFUNC_MAP} from '../utils/functions'
-import {CSSProperties, DependencyList, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {CSSProperties, DependencyList, MouseEvent, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import useEffectOnce from '../utils/useEffectOnce'
 import {Property} from 'csstype'
 
@@ -64,15 +64,16 @@ const TimerBar = ({interval, initStartTime, forcePause}: TimerBarProps) => {
 
 interface ImageWrapperProps<T> {
   item: T
+  onClick?: (e: MouseEvent<HTMLElement>, item: T) => void
 }
 
-const ImageWrapper = <T extends JSSwiperData>({item}: ImageWrapperProps<T>) => {
+const ImageWrapper = <T extends JSSwiperData>({item, onClick}: ImageWrapperProps<T>) => {
   return item.link ? (
-    <Styled.ImageWrapperA theme={{backgroundColor: item.backgroundColor}} href={item.link} target={item.newTab ? '_blank' : undefined} rel="noopener noreferrer" draggable={false}>
+    <Styled.ImageWrapperA onClick={e => onClick?.(e, item)} theme={{backgroundColor: item.backgroundColor}} href={item.link} target={item.newTab ? '_blank' : undefined} rel="noopener noreferrer" draggable={false}>
       <Styled.Image theme={{objectFit: item.objectFit}} src={item.image} draggable={false} alt={item.alt} />
     </Styled.ImageWrapperA>
   ) : (
-    <Styled.ImageWrapperDiv theme={{backgroundColor: item.backgroundColor}}>
+    <Styled.ImageWrapperDiv onClick={e => onClick?.(e, item)} theme={{backgroundColor: item.backgroundColor}}>
       <Styled.Image theme={{objectFit: item.objectFit}} src={item.image} draggable={false} alt={item.alt} />
     </Styled.ImageWrapperDiv>
   )
@@ -87,6 +88,7 @@ type JSSwiperProps<T, U, V> = {
   stateButton?: V
   onChangeItem?: (item: T) => void
   onChangeState?: (state: 'play' | 'pause') => void
+  onClick?: (e: MouseEvent<HTMLElement>) => void
 
   /** bug fix */
   startEffect?: 'useEffectOnce' | ((callback: React.EffectCallback, dependencyList: DependencyList | undefined) => void)
@@ -120,6 +122,7 @@ const JSSwiper = <T extends JSSwiperData, U extends React.MutableRefObject<HTMLB
   interval = 0,
   onChangeItem: handleChangeItem = () => {},
   onChangeState: handleChangeState = () => {},
+  onClick: handleClick = () => {},
   width,
   height,
   startEffect,
@@ -131,7 +134,7 @@ const JSSwiper = <T extends JSSwiperData, U extends React.MutableRefObject<HTMLB
 
   const mainEl = useRef<HTMLDivElement>(null)
   const mainWidth = useMemo(() => mainEl.current?.clientWidth || 0, [mainEl.current?.clientWidth])
-  const swipeSize = useMemo(() => (mainEl.current?.clientWidth || 0) / 4 ?? 100, [mainEl.current?.clientWidth])
+  const swipeSize = useMemo(() => (mainEl.current?.clientWidth || 0) / 4, [mainEl.current?.clientWidth])
 
   const [item, setItem] = useState<SwiperState<T>>({visible: items[0]})
   const [style, setStyle] = useState<CSSProperties>(initialStyle)
@@ -391,7 +394,7 @@ const JSSwiper = <T extends JSSwiperData, U extends React.MutableRefObject<HTMLB
       >
         {!item.prev && !!touch?.prev && <ImageWrapper key={touch.prev.order} item={touch.prev} />}
         {!!item.prev && <ImageWrapper key={item.prev.order} item={item.prev} />}
-        <ImageWrapper key={item.visible.order} item={item.visible} />
+        <ImageWrapper key={item.visible.order} item={item.visible} onClick={handleClick} />
         {!!item.next && <ImageWrapper key={item.next.order} item={item.next} />}
         {!item.next && !!touch?.next && <ImageWrapper key={touch.next.order} item={touch.next} />}
       </Styled.ImagesWrapper>

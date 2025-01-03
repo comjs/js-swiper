@@ -33,6 +33,7 @@ function App() {
           duration={200}
           onChangeItem={console.log}
           onChangeState={console.log}
+          onClick={console.log}
         />
         <div style={{display: 'inline-block'}}>
           <button ref={prevButtonEl}>prev</button>
