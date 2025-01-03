@@ -88,7 +88,7 @@ type JSSwiperProps<T, U, V> = {
   stateButton?: V
   onChangeItem?: (item: T) => void
   onChangeState?: (state: 'play' | 'pause') => void
-  onClick?: (e: MouseEvent<HTMLElement>) => void
+  onClick?: (e: MouseEvent<HTMLElement>, item: T) => void
 
   /** bug fix */
   startEffect?: 'useEffectOnce' | ((callback: React.EffectCallback, dependencyList: DependencyList | undefined) => void)
